@@ -78,7 +78,7 @@ def config_user_edit():
     user.add_user(user_name, password)
     user.save()
     kif()
-    return redirect("/")
+    return render_template('config_user.html', users=user.get_users())
 
 
 
