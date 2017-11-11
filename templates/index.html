@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<body>
+
+  <div id="floating-menu">
+
+     <a href="/" target="_blank">　対局結果一覧　</a>
+     <a href="/analitics" target="_blank">　統計　</a>
+     <a href="/kif" target="_blank">　棋譜取得　</a>
+      <a href="/config_user" target="_blank">　ユーザー情報編集　</a>
+     <input type="submit" value="更新" form="all">
+  </div>
+
+  <div class="container">
+    <div class="header">
+<form id="all" name="all" class="ss" action="/" method="post" styleId="sampleId" >
+    <h3 class="text-muted" style="margin-top:60px">対局結果</h3>
+
+<img src="/static/rate.png" height="300">
+    <table>
+      {% for id, result in data %}
+      <div id="kif_id_{{result[-1]}}">
+
+            <tr>
+              <td> <select name="lv1_{{result[-1]}}" id="lv1Pulldown_{{result[-1]}}">
+                <option value="未分類">▼選択</option>
+                {% for key, value in senkei.items() %}
+                {% if key != result[0]%}
+                  <option value="{{key}}"> {{key}} </option>
+                {% else %}
+                  <option value="{{key}}" selected> {{key}} </option>
+                {% endif %}
+                {% endfor %}
+              </select> </td>
+
+              <td>
+                <select name="lv2_{{result[-1]}}" id="lv2Pulldown_{{result[-1]}}" >
+                  <option value="未分類">▼選択</option>
+                  {% for key, value in senkei.items() %} {% for k in value %}
+                  {% if k != result[1]%}
+                    <option value="{{k}}" class="{{key}}">  {{k}} </option>
+                  {% else %}
+                    <option value="{{k}}" class="{{key}}" selected> {{k}} </option>
+                  {% endif %}
+
+
+                  {% endfor %} {% endfor %}
+                </select>
+              </td>
+              {% for x in result[2:-2] %}
+              <td> {{x}} </td>
+             {% endfor%}
+             <td> <a href="{{result[-2]}}" target="_blank">　棋譜　</a> </td>
+           </tr>
+
+
+
+
+      </div>
+      {% endfor %}
+    </table>
+        </form>
+    </div>
+  </div>
+</body>
+{% endblock %}

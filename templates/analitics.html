@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block content %}
+<body>
+
+  <div id="floating-menu"  >
+    <a href="/" target="_blank">　対局結果一覧　</a>
+    <a href="/analitics" target="_blank">　統計　</a>
+    <a href="/kif" target="_blank">　棋譜取得　</a>
+     <a href="/config_user" target="_blank">　ユーザー情報編集　</a>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h3 class="text-muted" style="margin-top:60px">統計結果</h3>
+<img src="/static/rate.png" height="300">
+    <table>
+      <tr>
+        <th> 戦法</th>
+        <th> </th>
+        <th> </th>
+        <th> 勝率</th>
+        <th> 勝ち</th>
+        <th> 負け</th>
+        <th> 千日手</th>
+      </tr>
+      {% for key, value in analitics.items() %}
+        <tr>
+          <td> {{key}} 累計</td>
+        <td></td>
+        <td> 先手 </td>
+        <td>{{value[0]['先手'][0]}}</td>
+        <td>{{value[0]['先手'][1]}}</td>
+        <td>{{value[0]['先手'][2]}}</td>
+        <td>{{value[0]['先手'][3]}}</td>
+
+        </tr>
+        <tr>
+          <td> {{key}} 累計</td>
+          <td></td>
+        <td> 後手 </td>
+
+        <td>{{value[0]['後手'][0]}}</td>
+        <td>{{value[0]['後手'][1]}}</td>
+        <td>{{value[0]['後手'][2]}}</td>
+        <td>{{value[0]['後手'][3]}}</td>
+        </tr>
+       {% for k, v in value[1].items() %}
+          <tr>
+                <td></td>
+                <td> {{k}}</td>
+                <td> 先手</td>
+                {% for x in v["先手"] %}
+                <td> {{x}} </td>
+                {% endfor %}
+          </tr>
+          <tr>
+            <td></td>
+            <td> {{k}} </td>
+            <td> 後手</td>
+            {% for x in v["後手"] %}
+            <td> {{x}} </td>
+            {% endfor %}
+          </tr>
+       {% endfor %}
+      {% endfor %}
+    <table>
+    </div>
+  </div>
+</body>
+{% endblock %}

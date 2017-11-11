@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+   <link type="text/css" rel="stylesheet" href="/static/style.css">
+  <script type="text/javascript" src="/static/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var result = $('div[id^="kif_id"]');
+    //result = result.split("_")
+
+    result.each(function(i, box){
+        var kif_id = $(this).attr("id").split("_")[2]
+        var lv1 = "#lv1Pulldown_"+kif_id
+        var lv2 = "#lv2Pulldown_"+kif_id
+        var lv3 = "#lv3Pulldown_"+kif_id
+        // プルダウンのoption内容をコピー
+        var pd2 = $(lv2+" option").clone();
+        var pd3 = $(lv3+" option").clone();
+
+        //読み込み時に値があるかどうかで処理をするコードを書く（いつか）
+
+        // 1→2連動
+        $(lv1).change(function () {
+            // lv1のvalue取得
+
+            var lv1Val = $(lv1).val();
+            console.log(lv1Val)
+            // lv2Pulldownのdisabled解除
+            $(lv2).removeAttr("disabled");
+
+            // 一旦、lv2Pulldownのoptionを削除
+            $(lv2+" option").remove();
+
+            // (コピーしていた)元のlv2Pulldownを表示
+            $(pd2).appendTo(lv2);
+
+            // 選択値以外のクラスのoptionを削除
+            $(lv2+" option[class != "+lv1Val+"]").remove();
+
+            // 「▼選択」optionを先頭に表示
+            $(lv2).prepend('<option value="未分類" selected="selected">▼選択</option>');
+
+            // lv3Pulldown disabled処理
+            $(lv3).attr("disabled", "disabled");
+            $(lv3+" option").remove();
+            $(lv3).prepend('<option value="未分類" selected="selected">▼選択</option>');
+        });
+
+        // 2→3連動
+        $(lv2).change(function () {
+            // lv2のvalue取得
+            var lv2Val = $(lv2).val();
+
+            // lv3Pulldownのdisabled解除
+            $(lv3).removeAttr("disabled");
+
+            // 一旦、lv3Pulldownのoptionを削除
+            $(lv3+" option").remove();
+
+            // (コピーしていた)元のlv3Pulldownを表示
+            $(pd3).appendTo(lv3);
+
+            // 選択値以外のクラスのoptionを削除
+            $(lv3+" option[class != p"+lv2Val+"]").remove();
+
+            // 「▼選択」optionを先頭に表示
+            $(lv3).prepend('<option value="0" selected="selected">▼選択</option>');
+        });
+    });
+
+
+
+});
+</script>
+<title>{{ title }}</title>
+<body>
+{% block content %}
+<!-- ここにメインコンテンツを書く -->
+{% endblock %}
+</body>
+</head>
