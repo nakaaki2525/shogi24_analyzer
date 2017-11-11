@@ -2,6 +2,7 @@
 import requests
 from html.parser import HTMLParser
 import os
+from user import Users
 class KifParser(HTMLParser):
 
     def __init__(self):
@@ -27,27 +28,27 @@ class KifParser(HTMLParser):
             self.text += data
 
 def get_kif():
-    if not os.path.exists("user_pass.txt"):
+    login_url = "http://web.shogidojo.net/kifu/srv/login"
+    kifs_url = "http://web.shogidojo.net/kifu/srv/search"
+
+    if not os.path.exists("user_pass.json"):
         pass
     else:
-        f = open("user_pass.txt")
-        user = f.readline().strip()
-        password = f.readline().strip()
-        f.close()
-        url = "http://web.shogidojo.net/kifu/srv/login"
-        response = requests.post(url, data={'name':user,'pwd':password})
-        url2 = "http://web.shogidojo.net/kifu/srv/search"
-        cook = response.cookies
-        kif_file_list = requests.post(url2, cookies=cook.get_dict(), data={'from_date':'2000-1-1',"to_date":"2030-1-1","sub":"a"})
-        response.text
-        parser = KifParser()
-        parser.feed(kif_file_list.text)
-        parser.close()
+        users = Users().get_users()
+        for user, password in users.items():
 
-        for kif_url, filename in parser.links:
-            if not os.path.exists("static/kif"):
-                os.mkdir("static/kif")
-            f = open("./static/kif/"+filename+'.kif', 'w')
-            kif_file = requests.post(kif_url, cookies=cook.get_dict())
-            f.write(kif_file.text)
-            f.close()
+            response = requests.post(login_url, data={'name':user,'pwd':password})
+            cook = response.cookies
+            kif_file_list = requests.post(kifs_url, cookies=cook.get_dict(), data={'from_date':'2000-1-1',"to_date":"2030-1-1","sub":"a"})
+            response.text
+            parser = KifParser()
+            parser.feed(kif_file_list.text)
+            parser.close()
+
+            for kif_url, filename in parser.links:
+                if not os.path.exists("static/kif"):
+                    os.mkdir("static/kif")
+                f = open("./static/kif/"+filename+'.kif', 'w')
+                kif_file = requests.post(kif_url, cookies=cook.get_dict())
+                f.write(kif_file.text)
+                f.close()

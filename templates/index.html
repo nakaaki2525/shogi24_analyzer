@@ -7,6 +7,7 @@
      <a href="/" target="_blank">　対局結果一覧　</a>
      <a href="/analitics" target="_blank">　統計　</a>
      <a href="/kif" target="_blank">　棋譜取得　</a>
+     <a href="/rate" target="_blank">　レート推移　</a>
       <a href="/config_user" target="_blank">　ユーザー情報編集　</a>
      <input type="submit" value="更新" form="all">
   </div>
@@ -16,7 +17,6 @@
 <form id="all" name="all" class="ss" action="/" method="post" styleId="sampleId" >
     <h3 class="text-muted" style="margin-top:60px">対局結果</h3>
 
-<img src="/static/rate.png" height="300">
     <table>
       {% for id, result in data %}
       <div id="kif_id_{{result[-1]}}">

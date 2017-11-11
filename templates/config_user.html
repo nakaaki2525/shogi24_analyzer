@@ -2,13 +2,7 @@
 {% block content %}
 <body>
 
-  <div id="floating-menu">
-
-     <a href="/" target="_blank">　対局結果一覧　</a>
-     <a href="/analitics" target="_blank">　統計　</a>
-     <a href="/kif" target="_blank">　棋譜取得　</a>
-     <a href="/config_user" target="_blank">　ユーザー情報編集　</a>
-  </div>
+{% include "navi_bar.html" %}
 
   <div class="container">
     <div class="header">
@@ -22,8 +16,15 @@
           <p>パスワード<br>
           <input type="password" name="password">
           </p>
-          <input type="submit" value="更新" >
+          <input type="submit" value="追加" >
         </form>
+
+        {% for user, password in users.items() %}
+          <table>
+            <tr>     <th> user_name</th> <th> password</th> </tr>
+            <tr> <td> {{user }}</td> <td> {% for x in password%}  * {% endfor %} </td></tr>
+          </table>
+        {% endfor %}
     </div>
   </div>
 </body>

@@ -43,6 +43,18 @@ class DuelData(object):
             rates.append(rate)
         plt.plot(list(range(len(rates))), rates)
         plt.savefig( 'static/rate.png' )
+        plt.close()
+
+    def create_user_graph(self, user_name):
+        data = self.get_data()
+        rates = []
+        for v in data:
+            if v[1][4] == user_name:
+                rate = int(v[1][5])
+                rates.append(rate)
+        plt.plot(list(range(len(rates))), rates)
+        plt.savefig( 'static/rate_'+user_name+'.png' )
+        plt.close()
 
     def save_data(self, form):
         for key, value in self.data.items():

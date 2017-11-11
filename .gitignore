@@ -1,5 +1,6 @@
+.gitignore
 kif
-user_pass.txt
+user_pass.json
 rate.png
 data.json
 __pycache__
