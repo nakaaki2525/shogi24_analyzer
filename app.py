@@ -13,15 +13,15 @@ app = Flask(__name__)
 
 def index():
 
+    page = int(request.args.get("page", "1"))
+
     data = DuelData()
     user= Users()
-    data.create_graph()
-    for user_name, password in user.get_users().items():
-        data.create_user_graph(user_name)
+    page_num = list(range(1, 1+int(len(data.get_data())/100)+1))
     f = codecs.open("senkei.json", 'r', "utf-8")
     senkei = json.load(f)
     f.close()
-    return render_template('index.html', senkei=senkei, data=data.get_data())
+    return render_template('index.html', senkei=senkei, data=data.get_data(page), page_num=page_num, page=page)
 
 
 @app.route('/', methods=['POST'])

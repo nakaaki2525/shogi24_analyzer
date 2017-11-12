@@ -32,7 +32,9 @@ class DuelData(object):
         f.write(json.dumps(self.data))
         f.close()
 
-    def get_data(self):
+    def get_data(self, page=None):
+        if page!=None:
+            return sorted(self.data.items())[100*(page-1):100*page]
         return sorted(self.data.items())
 
     def create_graph(self):

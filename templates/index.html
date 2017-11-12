@@ -17,6 +17,13 @@
 <form id="all" name="all" class="ss" action="/" method="post" styleId="sampleId" >
     <h3 class="text-muted" style="margin-top:60px">対局結果</h3>
 
+    {% for p in page_num %}
+    {% if p == page %}
+      {{p}}
+    {% else %}
+      <a href="/?page={{page+1}}" target="_blank"> {{p}}　</a>
+    {% endif %}
+    {% endfor %}
     <table>
       {% for id, result in data %}
       <div id="kif_id_{{result[-1]}}">
