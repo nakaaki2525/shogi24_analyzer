@@ -76,11 +76,16 @@ def config_user_edit():
     password = request.form.getlist("password")[0]
     user= Users()
     user.add_user(user_name, password)
-    user.save()
     kif()
     return render_template('config_user.html', users=user.get_users())
 
-
+@app.route('/delete_user', methods=['POST'])
+def delete_user():
+    user_name = request.form.getlist("user")[0]
+    user= Users()
+    user.delete_user(user_name)
+    kif()
+    return render_template('config_user.html', users=user.get_users())
 
 if __name__ == "__main__":
     app.run(debug=True)
