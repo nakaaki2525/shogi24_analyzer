@@ -34,8 +34,8 @@ class DuelData(object):
 
     def get_data(self, page=None):
         if page!=None:
-            return sorted(self.data.items())[100*(page-1):100*page]
-        return sorted(self.data.items())
+            return sorted(self.data.items(), reverse=True)[100*(page-1):100*page]
+        return sorted(self.data.items(), reverse=True)
 
     def create_graph(self):
         data = self.get_data()
