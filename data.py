@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 class DuelData(object):
     data = {}
-    lv_map = {"lv1": 0, "lv2": 1}
+    lv_map = {"lv1": 0, "lv2": 1, "lv2": 2}
     def __init__(self):
         if os.path.exists("./data.json"):
             self.load()
@@ -18,8 +18,8 @@ class DuelData(object):
                     continue
                 tmp = RegFileName(filename.replace(".kif", '')).get_result()
                 if tmp[-1] not in self.data:
-                    self.data[tmp[-1]] = ['未分類', '未分類'] + tmp
-                    self.data[tmp[-1]][6] = "/static/kif/"+filename
+                    self.data[tmp[-1]] = ['未分類', '未分類', '未分類'] + tmp
+                    self.data[tmp[-1]][7] = "/static/kif/"+filename
             self.save()
 
     def load(self):

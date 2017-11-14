@@ -19,7 +19,7 @@
 
     {% for p in page_num %}
     {% if p == page %}
-      {{p}}
+      {{p}} {{ page_num }}
     {% else %}
       <a href="/?page={{p}}" target="_blank"> {{p}}　</a>
     {% endif %}
@@ -43,21 +43,39 @@
               <td>
                 <select name="lv2_{{result[-1]}}" id="lv2Pulldown_{{result[-1]}}" >
                   <option value="未分類">▼選択</option>
-                  {% for key, value in senkei.items() %} {% for k in value %}
+                  {% for key, value in senkei.items() %} {% for k, v in value.items() %}
                   {% if k != result[1]%}
                     <option value="{{k}}" class="{{key}}">  {{k}} </option>
                   {% else %}
                     <option value="{{k}}" class="{{key}}" selected> {{k}} </option>
                   {% endif %}
 
-
                   {% endfor %} {% endfor %}
+
                 </select>
               </td>
-              {% for x in result[2:-2] %}
+
+
+              <td>
+                <select name="lv3_{{result[-1]}}" id="lv3Pulldown_{{result[-1]}}" >
+                  <option value="未分類">▼選択</option>
+                  {% for key, value in senkei.items() %} {% for k, v in value.items() %} {% for x in v %}
+                  {% if k != result[2]%}
+                    <option value="{{x}}" class="{{k}}">  {{x}} </option>
+                  {% else %}
+                    <option value="{{x}}" class="{{k}}" selected> {{x}} </option>
+                  {% endif %}
+                    {% endfor %} {% endfor %} {% endfor %}
+                </select>
+              </td>
+
+
+
+
+              {% for x in result[3:-2] %}
               <td> {{x}} </td>
              {% endfor%}
-             <td> <a href="{{result[-2]}}" target="_blank">　棋譜　</a> </td>
+             <td> <a href="{{result[-3]}}" target="_blank">　棋譜　</a> </td>
            </tr>
 
 
