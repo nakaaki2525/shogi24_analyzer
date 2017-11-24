@@ -38,7 +38,7 @@ class DuelData(object):
         return sorted(self.data.items(), reverse=True)
 
     def create_graph(self):
-        data = self.get_data()
+        data = reversed(self.get_data())
         rates = []
         for v in data:
             rate = int(v[1][6])
@@ -48,11 +48,12 @@ class DuelData(object):
         plt.close()
 
     def create_user_graph(self, user_name):
-        data = self.get_data()
+        data = reversed(self.get_data())
         rates = []
         for v in data:
             if v[1][5] == user_name:
                 rate = int(v[1][6])
+                print(rate, user_name)
                 rates.append(rate)
         plt.plot(list(range(len(rates))), rates)
         plt.savefig( 'static/rate_'+user_name+'.png' )
