@@ -35,7 +35,7 @@ class Analitics(object):
         for x in data:
 
             x = x[1]
-            print(x)
+            # print(x)
             l1 = x[0]
             l2 = x[1]
             l3 = x[2]
@@ -50,6 +50,7 @@ class Analitics(object):
         for l1, values in tmp.items():
             for l2, value in values.items():
                 for l3, v in value.items():
+
                     if (v["先手"][0]+v["先手"][1]) != 0:
                         v["先手"].insert(0, float(v["先手"][0]) / (v["先手"][0]+v["先手"][1]))
                     else:

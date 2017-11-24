@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 class DuelData(object):
     data = {}
-    lv_map = {"lv1": 0, "lv2": 1, "lv2": 2}
+    lv_map = {"lv1": 0, "lv2": 1, "lv3": 2}
     def __init__(self):
         if os.path.exists("./data.json"):
             self.load()
@@ -62,9 +62,18 @@ class DuelData(object):
         for key, value in self.data.items():
             lv1 = form.getlist("lv1_"+key)
             lv2 = form.getlist("lv2_"+key)
+            lv3 = form.getlist("lv3_"+key)
             if len(lv1) !=0:
                 self.data[key][0] = lv1[0]
+            else:
+                self.data[key][0] = "未分類"
             if len(lv2) !=0:
                 self.data[key][1] = lv2[0]
+            else:
+                self.data[key][1] = "未分類"
+            if len(lv2) !=0:
+                self.data[key][2] = lv3[0]
+            else:
+                self.data[key][2] = "未分類"
 
         self.save()
