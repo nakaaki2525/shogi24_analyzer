@@ -64,16 +64,19 @@ class DuelData(object):
             lv2 = form.getlist("lv2_"+key)
             lv3 = form.getlist("lv3_"+key)
             if len(lv1) !=0:
-                self.data[key][0] = lv1[0]
-            else:
-                self.data[key][0] = "未分類"
+                if lv1[0] != "":
+                    self.data[key][0] = lv1[0]
+                else:
+                    self.data[key][0] = "未分類"
             if len(lv2) !=0:
-                self.data[key][1] = lv2[0]
-            else:
-                self.data[key][1] = "未分類"
-            if len(lv2) !=0:
-                self.data[key][2] = lv3[0]
-            else:
-                self.data[key][2] = "未分類"
+                if lv2[0] != "":
+                    self.data[key][1] = lv2[0]
+                else:
+                    self.data[key][1] = "未分類"
+            if len(lv3) !=0:
+                if lv3[0] != "":
+                    self.data[key][2] = lv3[0]
+                else:
+                    self.data[key][2] = "未分類"
 
         self.save()
