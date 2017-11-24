@@ -41,7 +41,7 @@ class DuelData(object):
         data = self.get_data()
         rates = []
         for v in data:
-            rate = int(v[1][5])
+            rate = int(v[1][6])
             rates.append(rate)
         plt.plot(list(range(len(rates))), rates)
         plt.savefig( 'static/rate.png' )
@@ -51,8 +51,8 @@ class DuelData(object):
         data = self.get_data()
         rates = []
         for v in data:
-            if v[1][4] == user_name:
-                rate = int(v[1][5])
+            if v[1][5] == user_name:
+                rate = int(v[1][6])
                 rates.append(rate)
         plt.plot(list(range(len(rates))), rates)
         plt.savefig( 'static/rate_'+user_name+'.png' )

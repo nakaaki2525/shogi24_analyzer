@@ -60,7 +60,7 @@
                 <select name="lv3_{{result[-1]}}" id="lv3Pulldown_{{result[-1]}}" >
                   <option value="未分類">▼選択</option>
                   {% for key, value in senkei.items() %} {% for k, v in value.items() %} {% for x in v %}
-                  {% if k != result[2]%}
+                  {% if x != result[2]%}
                     <option value="{{x}}" class="{{k}}">  {{x}} </option>
                   {% else %}
                     <option value="{{x}}" class="{{k}}" selected> {{x}} </option>
@@ -75,7 +75,7 @@
               {% for x in result[3:-2] %}
               <td> {{x}} </td>
              {% endfor%}
-             <td> <a href="{{result[-3]}}" target="_blank">　棋譜　</a> </td>
+             <td> <a href="{{result[-2]}}" target="_blank">　棋譜　</a> </td>
            </tr>
 
 

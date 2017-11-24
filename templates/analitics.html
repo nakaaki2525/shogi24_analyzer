@@ -13,51 +13,88 @@
         <th> 戦法</th>
         <th> </th>
         <th> </th>
+        <th> </th>
         <th> 勝率</th>
         <th> 勝ち</th>
         <th> 負け</th>
         <th> 千日手</th>
       </tr>
-      {% for key, value in analitics.items() %}
+      {% for l1, values in analitics.items() %}
+      <tr>
+        <td> {{l1}} 累計</td>
+      <td></td>
+      <td></td>
+      <td> 先手 </td>
+      <td>{{ '%0.2f' % values[0]['先手'][0] }}</td>
+      <td>{{values[0]['先手'][1]}}</td>
+      <td>{{values[0]['先手'][2]}}</td>
+      <td>{{values[0]['先手'][3]}}</td>
+      </tr>
+      <tr>
+        <td> {{l1}} 累計</td>
+      <td></td>
+      <td></td>
+      <td> 後手 </td>
+      <td>{{ '%0.2f' % values[0]['後手'][0]}}</td>
+      <td>{{values[0]['後手'][1]}}</td>
+      <td>{{values[0]['後手'][2]}}</td>
+      <td>{{values[0]['後手'][3]}}</td>
+      </tr>
+
+        {% for l2, value in values[1].items() if l1 != "未分類"  %}
         <tr>
-          <td> {{key}} 累計</td>
+          <td></td>
+          <td> {{l2}} 累計</td>
         <td></td>
         <td> 先手 </td>
-        <td>{{value[0]['先手'][0]}}</td>
+        <td>{{ '%0.2f' % value[0]['先手'][0]}}</td>
         <td>{{value[0]['先手'][1]}}</td>
         <td>{{value[0]['先手'][2]}}</td>
         <td>{{value[0]['先手'][3]}}</td>
+        </tr>
 
+        <tr>
+          <td></td>
+          <td> {{l2}} 累計</td>
+          <td></td>
+          <td> 後手 </td>
+
+          <td>{{ '%0.2f' % value[0]['後手'][0]}}</td>
+          <td>{{value[0]['後手'][1]}}</td>
+          <td>{{value[0]['後手'][2]}}</td>
+          <td>{{value[0]['後手'][3]}}</td>
+        </tr>
+
+        {% for l3, x in value[1].items() if l2 != "未分類"%}
+        <tr>
+          <td></td>
+          <td></td>
+          <td>{{l3}}</td>
+          <td>先手</td>
+          <td> {{ '%0.2f' % x["先手"][0]}} </td>
+          <td> {{x["先手"][1]}} </td>
+          <td> {{x["先手"][2]}} </td>
+          <td> {{x["先手"][3]}} </td>
         </tr>
         <tr>
-          <td> {{key}} 累計</td>
           <td></td>
-        <td> 後手 </td>
-
-        <td>{{value[0]['後手'][0]}}</td>
-        <td>{{value[0]['後手'][1]}}</td>
-        <td>{{value[0]['後手'][2]}}</td>
-        <td>{{value[0]['後手'][3]}}</td>
+          <td></td>
+          <td>{{l3}}</td>
+          <td>後手</td>
+          <td> {{ '%0.2f' % x["後手"][0]}} </td>
+          <td> {{x["後手"][1]}} </td>
+          <td> {{x["後手"][2]}} </td>
+          <td> {{x["後手"][3]}} </td>
         </tr>
-       {% for k, v in value[1].items() %}
-          <tr>
-                <td></td>
-                <td> {{k}}</td>
-                <td> 先手</td>
-                {% for x in v["先手"] %}
-                <td> {{x}} </td>
-                {% endfor %}
-          </tr>
-          <tr>
-            <td></td>
-            <td> {{k}} </td>
-            <td> 後手</td>
-            {% for x in v["後手"] %}
-            <td> {{x}} </td>
-            {% endfor %}
-          </tr>
-       {% endfor %}
-      {% endfor %}
+        {% endfor %}
+      </tr>
+
+
+
+
+
+        {% endfor %}
+        {% endfor %}
     <table>
     </div>
   </div>
