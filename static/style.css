@@ -11,7 +11,8 @@ div#floating-menu {
 
 table {
 border: 2px #0000ff solid;
-border-collapse:collapse
+border-collapse:collapse;
+margin-bottom:10px
 }
 
 th {

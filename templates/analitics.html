@@ -8,18 +8,20 @@
     <div class="header">
       <h3 class="text-muted" style="margin-top:60px">統計結果</h3>
 <img src="/static/rate.png" height="300">
-    <table>
-      <tr>
-        <th> 戦法</th>
-        <th> </th>
-        <th> </th>
-        <th> </th>
-        <th> 勝率</th>
-        <th> 勝ち</th>
-        <th> 負け</th>
-        <th> 千日手</th>
-      </tr>
+
       {% for l1, values in analitics.items() %}
+      <table>
+        <tr>
+          <th> 戦法</th>
+          <th> </th>
+          <th> </th>
+          <th> </th>
+          <th> 勝率</th>
+          <th> 勝ち</th>
+          <th> 負け</th>
+          <th> 千日手</th>
+        </tr>
+        
       <tr>
         <td> {{l1}} 累計</td>
       <td></td>
@@ -94,8 +96,9 @@
 
 
         {% endfor %}
+        <table>
         {% endfor %}
-    <table>
+
     </div>
   </div>
 </body>
