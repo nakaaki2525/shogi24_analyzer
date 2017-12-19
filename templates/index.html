@@ -61,9 +61,9 @@
                   <option value="未分類">▼選択</option>
                   {% for key, value in senkei.items() %} {% for k, v in value.items() %} {% for x in v %}
                   {% if x != result[2]%}
-                    <option value="{{x}}" class="{{k}}">  {{x}} </option>
+                    <option value="{{x}}" class="{{key+"_"+k}}">  {{x}} </option>
                   {% else %}
-                    <option value="{{x}}" class="{{k}}" selected> {{x}} </option>
+                    <option value="{{x}}" class="{{key+"_"+k}}" selected> {{x}} </option>
                   {% endif %}
                     {% endfor %} {% endfor %} {% endfor %}
                 </select>
